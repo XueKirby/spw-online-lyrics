@@ -1,0 +1,26 @@
+{
+  "configs": [
+    {
+      "title": "在线歌词",
+      "config": "config.json",
+      "preferences": [
+        {
+          "key": "enabled",
+          "type": "switch",
+          "title": "启用在线歌词",
+          "summary": "当不存在本地歌词时，从网易云接口尝试获取歌词",
+          "default_value": true
+        },
+        {
+          "key": "netease.sub_lyrics",
+          "type": "list",
+          "title": "副歌词行",
+          "summary": "选择副歌词行内容（需在 SPW 中开启“翻译显示”才会显示副歌词行）",
+          "entries": ["不显示", "罗马字", "翻译"],
+          "entry_values": ["none", "romaji", "translation"],
+          "default_value": "none"
+        }
+      ]
+    }
+  ]
+}
