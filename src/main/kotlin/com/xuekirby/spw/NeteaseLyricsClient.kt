@@ -32,7 +32,7 @@ import kotlinx.serialization.json.Json
  * 网易云歌词客户端（直连 music.163.com 的公开 API）。
  *
  * 说明：
- * - SPW 插件环境可能缺少 `java.net.http.HttpClient`，因此使用 `HttpURLConnection` 实现请求。
+ * - SPW 运行环境可能缺少 `java.net.http.HttpClient`，因此使用 `HttpURLConnection` 实现请求。
  * - 仅实现“搜索歌曲 -> 拉取歌词”这条链路，返回 LRC 及可选的翻译/罗马字（按时间轴合并由上层决定）。
  *
  * 接口要点：

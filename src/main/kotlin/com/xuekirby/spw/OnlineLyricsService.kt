@@ -29,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 /**
  * 负责：
- * - 读取插件配置
+ * - 读取模组配置
  * - 生成缓存键、进行简单缓存
  * - 调用在线歌词客户端并返回结果
  *
@@ -50,7 +50,7 @@ object OnlineLyricsService {
     private var configHelper: ConfigHelper? = null
 
     /**
-     * 获取歌词（兜底）。
+     * 获取歌词。
      *
      * @return LRC 文本或 `null`（表示无法提供）
      */
@@ -109,7 +109,7 @@ object OnlineLyricsService {
     }
 
     /**
-     * 从 SPW 的 ConfigManager 获取插件配置。
+     * 从 SPW 的 ConfigManager 获取模组配置。
      *
      * - 读取失败时回退到默认配置
      * - 会尝试兼容旧键名（`netease.enable_translation` / `netease.enable_romaji`）
@@ -175,7 +175,7 @@ data class OnlineLyricsConfig(
     /**
      * 总开关：
      * - `true`：在 SPW 默认歌词加载失败后尝试联网获取
-     * - `false`：完全禁用插件的歌词返回（始终返回 null）
+     * - `false`：完全禁用模组的歌词返回（始终返回 null）
      */
     val enabled: Boolean = true,
 
@@ -199,7 +199,7 @@ data class OnlineLyricsConfig(
     /**
      * 网络请求超时（毫秒）。
      *
-     * 注意：此处仅为客户端超时；SPW 对插件 IO 线程的调度/取消策略由其自身控制。
+     * 注意：此处仅为客户端超时；SPW 对模组 IO 线程的调度/取消策略由其自身控制。
      */
     val timeoutMs: Int = 8000,
 )
@@ -207,7 +207,7 @@ data class OnlineLyricsConfig(
 /**
  * 副歌词显示模式。
  *
- * 注意：SPW 的“翻译显示”通常对应副歌词行（同时间戳的第二行），因此本插件默认输出顺序为：
+ * 注意：SPW 的“歌词翻译/翻译显示”通常对应副歌词行（同时间戳的第二行），因此本模组默认输出顺序为：
  * - 同一时间戳先输出原文（主歌词行）
  * - 再输出翻译/罗马字（副歌词行）
  */

@@ -27,9 +27,9 @@ import org.pf4j.Extension
 @Extension
 class OnlineLyricsExtension : PlaybackExtensionPoint {
     /**
-     * 当 SPW 默认逻辑无法加载歌词时触发的兜底回调。
+     * 当 SPW 默认逻辑无法加载歌词时触发的回调。
      *
-     * - 返回 `null`：表示插件也无法提供歌词，交由 SPW 继续处理
+     * - 返回 `null`：表示模组也无法提供歌词，交由 SPW 继续处理
      * - 返回 LRC 文本：SPW 将使用该歌词
      *
      * 注意：此方法在 IO 线程执行，允许进行网络请求。

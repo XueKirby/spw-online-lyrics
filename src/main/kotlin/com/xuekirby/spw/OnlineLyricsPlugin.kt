@@ -26,9 +26,9 @@ import com.xuncorp.spw.workshop.api.SpwPlugin
 import com.xuncorp.spw.workshop.api.WorkshopApi
 
 /**
- * 插件入口。
+ * 模组入口。
  *
- * 注意：歌词兜底逻辑在 [OnlineLyricsExtension] 内实现（PlaybackExtensionPoint）。
+ * 注意：在线歌词逻辑在 [OnlineLyricsExtension] 内实现（PlaybackExtensionPoint）。
  */
 class OnlineLyricsPlugin(
     pluginContext: PluginContext

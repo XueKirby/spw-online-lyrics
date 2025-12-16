@@ -2,13 +2,13 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("java-library")
-    id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.jetbrains.kotlin.jvm)
     alias(libs.plugins.jetbrains.kotlin.plugin.serialization)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 group = "com.xuekirby.spw"
-version = "0.1.0"
+version = "0.1.1"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -25,9 +25,12 @@ kotlin {
 dependencies {
     compileOnly(kotlin("stdlib"))
 
-    project(":api").let {
-        compileOnly(it)
-        kapt(it)
+    rootProject.findProject(":api")?.let { apiProject ->
+        compileOnly(apiProject)
+        kapt(apiProject)
+    } ?: run {
+        compileOnly(libs.spw.workshop.api)
+        kapt(libs.spw.workshop.api)
     }
 
     implementation(libs.kotlinx.serialization.json)
@@ -36,8 +39,8 @@ dependencies {
 val pluginClass = "com.xuekirby.spw.OnlineLyricsPlugin"
 val pluginId = "com.xuekirby.spw.online-lyrics"
 val pluginName = "在线歌词"
-val pluginDescription = "当歌词不存在时，从在线服务兜底获取"
-val pluginVersion = "0.1.0"
+val pluginDescription = "本地没有歌词时，从在线服务获取歌词"
+val pluginVersion = "0.1.1"
 val pluginProvider = "XueKirby"
 val pluginRepository = "https://github.com/XueKirby/spw-online-lyrics"
 
@@ -77,4 +80,6 @@ tasks.register<Jar>("plugin") {
 }
 
 // For IDE import compatibility (some IDEs invoke this task per-module).
-tasks.register("prepareKotlinBuildScriptModel") {}
+if (tasks.findByName("prepareKotlinBuildScriptModel") == null) {
+    tasks.register("prepareKotlinBuildScriptModel") {}
+}
