@@ -8,7 +8,16 @@ plugins {
 }
 
 group = "com.xuekirby.spw"
-version = "0.1.1"
+
+val releaseVersion = providers.gradleProperty("releaseVersion")
+    .orElse(
+        providers.environmentVariable("GITHUB_REF_NAME")
+            .map { it.removePrefix("v") }
+    )
+    .orElse("0.1.1")
+    .get()
+
+version = releaseVersion
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -40,7 +49,7 @@ val pluginClass = "com.xuekirby.spw.OnlineLyricsPlugin"
 val pluginId = "com.xuekirby.spw.online-lyrics"
 val pluginName = "在线歌词"
 val pluginDescription = "本地没有歌词时，从在线服务获取歌词"
-val pluginVersion = "0.1.1"
+val pluginVersion = releaseVersion
 val pluginProvider = "XueKirby"
 val pluginRepository = "https://github.com/XueKirby/spw-online-lyrics"
 
