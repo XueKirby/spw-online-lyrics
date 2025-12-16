@@ -63,7 +63,7 @@ tasks.register<Jar>("plugin") {
     destinationDirectory.set(
         file(System.getenv("APPDATA") + "/Salt Player for Windows/workshop/plugins/")
     )
-    archiveFileName.set("$pluginName-$pluginVersion.zip")
+    archiveFileName.set("v$pluginVersion.zip")
 
     into("classes") {
         with(tasks.named<Jar>("jar").get())
